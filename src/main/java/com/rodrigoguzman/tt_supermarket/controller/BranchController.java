@@ -24,7 +24,7 @@ public class BranchController {
     @Autowired
     IBranchService branchService;
 
-    @GetMapping("")
+    @GetMapping
     public ResponseEntity<List<Branch>> getAllBranches() {
         try {
             List<Branch> branches = branchService.getAllBranches();
@@ -52,7 +52,7 @@ public class BranchController {
         }
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<String> createBranch(@RequestBody Branch branch) {
         try {
             branchService.createBranch(branch);

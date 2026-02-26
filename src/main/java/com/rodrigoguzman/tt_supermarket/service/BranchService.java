@@ -31,11 +31,9 @@ public class BranchService implements IBranchService {
 
     @Override
     public void updateBranch(Long id, Branch branch) {
-        System.out.println("serching for branch with id: " + id);
         Branch existingBranch = branchRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Branch not found with id: " + id));
 
-        System.out.println("existing branch: " + existingBranch);
         if (branch.getName() != null && !branch.getName().isEmpty()) {
             existingBranch.setName(branch.getName());
         }
