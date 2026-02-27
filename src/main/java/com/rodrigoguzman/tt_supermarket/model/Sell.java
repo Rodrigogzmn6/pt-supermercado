@@ -3,7 +3,9 @@ package com.rodrigoguzman.tt_supermarket.model;
 import java.time.LocalDate;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -32,6 +34,6 @@ public class Sell {
     private Branch branch;
 
     // Sell Details
-    @OneToMany(mappedBy = "sell")
+    @OneToMany(mappedBy = "sell", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<SellDetail> sellsDetails;
 }
