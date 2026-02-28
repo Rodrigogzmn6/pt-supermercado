@@ -31,10 +31,11 @@ public class SellService implements ISellService {
         Sell sell = sellRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("No sell found with that id."));
         SellDTO sellDTO = new SellDTO();
+        sellDTO.setId(sell.getId());
         sellDTO.setBranchId(sell.getBranch().getId());
         System.out.println("[INFO] Sell details: " + sell.getSellsDetails());
         sellDTO.setProductsDTOs(sell.getSellsDetails().stream().map(sellDetail -> {
-            return new ProductDTO(null, sellDetail.getProduct().getId(), sellDetail.getQuantity());
+            return new ProductDTO(sellDetail.getId(), sellDetail.getProduct().getId(), sellDetail.getQuantity());
         }).toList());
         return sellDTO;
     }
