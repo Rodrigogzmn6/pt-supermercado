@@ -34,7 +34,7 @@ public class ProductController {
 
             return ResponseEntity.status(HttpStatus.OK).body(products);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.internalServerError().build();
         }
     }
 
@@ -48,7 +48,7 @@ public class ProductController {
 
             return ResponseEntity.status(HttpStatus.OK).body(product);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.internalServerError().build();
         }
     }
 
@@ -58,7 +58,7 @@ public class ProductController {
             productService.createProduct(product);
             return ResponseEntity.status(HttpStatus.CREATED).body("Product created successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating product");
+            return ResponseEntity.internalServerError().body("Error creating product");
         }
     }
 
@@ -70,7 +70,7 @@ public class ProductController {
             }
             return ResponseEntity.status(HttpStatus.CREATED).body("Products created successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating product");
+            return ResponseEntity.internalServerError().body("Error creating product");
         }
     }
 
@@ -80,7 +80,7 @@ public class ProductController {
             productService.updateProduct(id, product);
             return ResponseEntity.status(HttpStatus.OK).body("Product updated successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating product");
+            return ResponseEntity.internalServerError().body("Error updating product");
         }
     }
 
@@ -90,7 +90,7 @@ public class ProductController {
             productService.deleteProduct(id);
             return ResponseEntity.status(HttpStatus.OK).body("Product deleted successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting product");
+            return ResponseEntity.internalServerError().body("Error deleting product");
         }
     }
 

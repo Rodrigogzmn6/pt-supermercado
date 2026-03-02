@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rodrigoguzman.tt_supermarket.dto.BranchDTO;
 import com.rodrigoguzman.tt_supermarket.exception.ResourceNotFoundException;
+import com.rodrigoguzman.tt_supermarket.mapper.Mapper;
 import com.rodrigoguzman.tt_supermarket.model.Branch;
 import com.rodrigoguzman.tt_supermarket.repository.IBranchRepository;
 
@@ -15,22 +17,25 @@ public class BranchService implements IBranchService {
     private IBranchRepository branchRepository;
 
     @Override
-    public List<Branch> getAllBranches() {
-        return branchRepository.findAll();
+    public List<BranchDTO> getAllBranches() {
+        return branchRepository.findAll().stream().map(Mapper::toDTO).toList();
     }
 
     @Override
-    public Branch getBranchById(Long id) {
-        return branchRepository.findById(id).orElse(null);
+    public BranchDTO getBranchById(Long id) {
+        Branch branch = branchRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Branch not found with id: " + id));
+
+        return Mapper.toDTO(branch);
     }
 
     @Override
-    public void createBranch(Branch branch) {
-        branchRepository.save(branch);
+    public BranchDTO createBranch(Branch branch) {
+        return Mapper.toDTO(branchRepository.save(branch));
     }
 
     @Override
-    public void updateBranch(Long id, Branch branch) {
+    public BranchDTO updateBranch(Long id, Branch branch) {
         Branch existingBranch = branchRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Branch not found with id: " + id));
 
@@ -44,11 +49,14 @@ public class BranchService implements IBranchService {
             existingBranch.setLongitud(branch.getLongitud());
         }
 
-        branchRepository.save(existingBranch);
+        return Mapper.toDTO(branchRepository.save(existingBranch));
     }
 
     @Override
     public void deleteBranch(Long id) {
+        branchRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Branch not found with id: " + id));
+
         branchRepository.deleteById(id);
     }
 }

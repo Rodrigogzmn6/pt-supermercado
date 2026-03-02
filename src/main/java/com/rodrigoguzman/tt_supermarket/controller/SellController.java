@@ -31,7 +31,7 @@ public class SellController {
             sellService.createSell(sellDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body("Sell created successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
 
@@ -52,7 +52,7 @@ public class SellController {
             List<SellDTO> sells = sellService.getSalesByBranchIdAndDate(branchId, date);
             return ResponseEntity.status(HttpStatus.OK).body(sells);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.internalServerError().build();
         }
     }
 
@@ -62,7 +62,7 @@ public class SellController {
             sellService.deleteSellById(id);
             return ResponseEntity.status(HttpStatus.OK).body("Sell deleted successfully");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
 }

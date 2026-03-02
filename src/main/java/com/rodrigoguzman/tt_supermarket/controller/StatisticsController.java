@@ -22,7 +22,7 @@ public class StatisticsController {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(statisticsService.getMostSoldProduct());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.internalServerError().build();
         }
     }
 

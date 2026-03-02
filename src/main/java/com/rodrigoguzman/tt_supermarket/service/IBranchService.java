@@ -2,16 +2,17 @@ package com.rodrigoguzman.tt_supermarket.service;
 
 import java.util.List;
 
+import com.rodrigoguzman.tt_supermarket.dto.BranchDTO;
 import com.rodrigoguzman.tt_supermarket.model.Branch;
 
 public interface IBranchService {
-    List<Branch> getAllBranches();
+    List<BranchDTO> getAllBranches();
 
-    Branch getBranchById(Long id);
+    BranchDTO getBranchById(Long id);
 
-    void createBranch(Branch branch);
+    BranchDTO createBranch(Branch branch);
 
-    void updateBranch(Long id, Branch branch);
+    BranchDTO updateBranch(Long id, Branch branch);
 
     void deleteBranch(Long id);
 }
